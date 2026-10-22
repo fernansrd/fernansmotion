@@ -109,6 +109,15 @@ const proyectos = [
     video: "assets/Work/animaciones-sin-tutoriales.mp4",
     chips: ["Horizontal", "Tutorial", "Motion"],
     texto: "Pieza de contenido propio sobre el proceso de aprender motion design desde el criterio, no desde los atajos. Una vuelta de tuerca al formato tutorial: sin revelar técnicas, solo mostrando resultados y razonamiento."
+},
+{
+    titulo: "Reel — El Día Black",
+    cliente: "El Día",
+    dur: "0:40",
+    aspecto: "v",
+    video: "assets/Work/DiaBlack.mp4",
+    chips: ["Vertical", "Comercial", "Reel"],
+    texto: "Reel vertical para la campaña El Día Black: presentadora a cámara y texto en pantalla que refuerza cada punto. Cuarenta segundos directos, con el ritmo que pide el formato: se entiende de un vistazo y no suelta hasta el cierre."
 }
 ];
 
