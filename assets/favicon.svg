@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1233"/>
+      <stop offset="50%" stop-color="#100a20"/>
+      <stop offset="100%" stop-color="#07040e"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.38)"/>
+      <stop offset="50%" stop-color="rgba(192,132,252,0.2)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="48%" cy="40%" r="58%">
+      <stop offset="0%" stop-color="rgba(168,85,247,0.55)"/>
+      <stop offset="60%" stop-color="rgba(124,77,255,0.18)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="fGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="25%" stop-color="#f3e8ff"/>
+      <stop offset="65%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#7c4dff"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#e9d5ff"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+  </defs>
+  <!-- Cuadro redondeado estilo squircle moderno -->
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bg)"/>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#glow)"/>
+  <rect x="2" y="2" width="60" height="60" rx="16" fill="none" stroke="url(#rim)" stroke-width="1.25"/>
+
+  <!-- F estilizada con inclinación cinética de 7 grados, curvas de motion design y cápsula flotante -->
+  <g transform="translate(33 32) skewX(-7) translate(-32 -32)">
+    <!-- Tronco principal y brazo superior curvo y fluido -->
+    <path d="M 18 20 C 18 17 20 15 23 15 L 45 15 C 47.7 15 49.5 17 49.5 19.5 C 49.5 22 47.7 24 45 24 L 26.5 24 L 26.5 45 C 26.5 47.5 24.5 49 22 49 C 19.5 49 18 47.5 18 45 Z" fill="url(#fGrad)"/>
+    <!-- Barra intermedia flotante estilo cápsula kinetic -->
+    <rect x="25.5" y="30.5" width="16" height="7.5" rx="3.75" fill="url(#barGrad)"/>
+    <!-- Destello especular en el vértice superior -->
+    <circle cx="23.5" cy="19.5" r="1.6" fill="#ffffff" opacity="0.95"/>
+  </g>
+</svg>

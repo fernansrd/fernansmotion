@@ -1,0 +1,41 @@
+:is(.btn-dark,.btn-line,.btn-ghost,.fmt,.lb-cta,.volver,.nav-pill a,.fm-orbit,.svc,.featured-card,.pieza,.pricing-card) { position: relative; }
+/* Barrido cromático y lente de luz en violeta, lila y destellos blancos */
+:is(.btn-dark,.btn-line,.btn-ghost,.fmt,.reel-mute,.featured-close,.lb-x,.lb-cta,.volver,.nav-pill a,.fm-orbit,.svc,.featured-card,.pieza,.pricing-card) {
+  isolation: isolate;
+  --lens-x: 50%;
+  --lens-y: 50%;
+}
+:is(.btn-dark,.btn-line,.btn-ghost,.fmt,.reel-mute,.featured-close,.lb-x,.lb-cta,.volver,.nav-pill a,.fm-orbit,.svc,.featured-card,.pieza,.pricing-card)::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: inherit;
+  clip-path: inset(0 round 16px);
+  opacity: 0;
+  background-image:
+    radial-gradient(ellipse 100px 65px at var(--lens-x) var(--lens-y), #ffffffd8 0%, #e9d5ff90 22%, #7c4dff55 48%, transparent 74%),
+    linear-gradient(110deg, transparent 24%, #4c1d9500 35%, #7c4dff66 43%, #d8b4feb5 48%, #ffffffeb 50%, #c084fca0 53%, #6b21a855 60%, transparent 72%);
+  background-size: 100% 100%, 280% 100%;
+  background-position: 0 0, 130% 0;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  transition: opacity .35s ease;
+}
+@media(hover:hover) {
+  :is(.btn-dark,.btn-line,.btn-ghost,.fmt,.reel-mute,.featured-close,.lb-x,.lb-cta,.volver,.nav-pill a,.fm-orbit,.svc,.featured-card,.pieza,.pricing-card):hover::after {
+    opacity: .85;
+    animation: fm-light-sweep 1.15s cubic-bezier(.22,.65,.25,1) both;
+  }
+  :is(.svc,.featured-card,.pieza,.pricing-card):hover {
+    box-shadow: 0 16px 42px -22px rgba(124, 77, 255, 0.55), 0 0 0 1px rgba(192, 132, 252, 0.6);
+  }
+}
+@keyframes fm-light-sweep {
+  from { background-position: 0 0, 130% 0; }
+  to { background-position: 0 0, -100% 0; }
+}
+@media(prefers-reduced-motion:reduce) {
+  :is(.btn-dark,.btn-line,.btn-ghost,.fmt,.reel-mute,.featured-close,.lb-x,.lb-cta,.volver,.nav-pill a,.fm-orbit,.svc,.featured-card,.pieza,.pricing-card)::after { animation: none !important; transition: none; background-image: radial-gradient(ellipse at center, rgba(192, 132, 252, 0.3), transparent 70%); }
+}
