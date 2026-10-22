@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fernansmotion • Motion Design que se queda contigo</title>
+  <meta name="description" content="Fernansmotion — Motion design cinematográfico, edición de video y piezas audiovisuales para marcas con ambición. Santo Domingo, República Dominicana.">
+  <meta name="theme-color" content="#050507">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_DO">
+  <meta property="og:title" content="Fernansmotion • Motion Design que se queda contigo">
+  <meta property="og:description" content="Motion design cinematográfico, edición de video y piezas de alto impacto para marcas con ambición.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="https://picsum.photos">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+  <style>
+    :root {
+      --purple: #a78bfa;
+      --purple-dark: #7c3aed;
+      --lilac: #c084fc;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .orb, .floating-dot, .hero-light, .reveal {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* Focus visibility for keyboard users */
+    :focus-visible {
+      outline: 2px solid #c4b5fd;
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 1rem;
+      top: -100px;
+      z-index: 200;
+      padding: 0.75rem 1.25rem;
+      background: #fff;
+      color: #000;
+      font-weight: 600;
+      border-radius: 0.75rem;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus {
+      top: 1rem;
+    }
+
+    /* Defer paint work for off-screen sections */
+    #services, #process, #about, #contact, footer {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 800px;
+    }
+    
+    .font-display {
+      font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .cinematic-bg {
+      background: #050507;
+    }
+
+    .section-bg {
+      background: #0a0a0f;
+    }
+
+    .heading-xl {
+      font-size: clamp(2.75rem, 6.4vw, 5.5rem);
+      line-height: 0.94;
+      font-weight: 600;
+      letter-spacing: -0.045em;
+    }
+
+    .heading-lg {
+      font-size: clamp(2.1rem, 5.5vw, 3.25rem);
+      line-height: 1.0;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #c084fc 0%, #a78bfa 35%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Hero heading second line animation - cinematic phrase rotation */
+    .animated-phrase-wrapper {
+      display: inline-block;
+      min-height: 1.1em;
+      min-width: 8.5em;  /* stable width for short phrases - prevents jumps */
+      overflow: hidden;
+      vertical-align: baseline;
+    }
+
+    #hero-phrase {
+      display: inline-block;
+      white-space: nowrap;  /* no wrapping, consistent width */
+      /* Ensure gradient works on the animated text */
+      background: linear-gradient(135deg, #c084fc 0%, #a78bfa 35%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Center vertical video thumb inside the modal card */
+    #modal-thumb {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .purple-glow {
+      box-shadow: 0 0 15px rgba(167, 139, 250, 0.25),
+                  0 0 35px rgba(167, 139, 250, 0.12);
+    }
+
+    .purple-glow-strong {
+      box-shadow: 0 0 25px rgba(167, 139, 250, 0.4),
+                  0 0 55px rgba(167, 139, 250, 0.18);
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 9999px;
+      filter: blur(64px);
+      opacity: 0.45;
+      mix-blend-mode: screen;
+      animation: orb-float 22s ease-in-out infinite;
+      z-index: 1;
+      will-change: transform;
+      contain: layout style;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .orb { filter: blur(40px); opacity: 0.3; animation: none; }
+      .orb-1, .orb-2, .orb-3 { width: 220px; height: 220px; }
+      .floating-dot { display: none; }
+    }
+
+    .orb-1 {
+      width: 520px;
+      height: 520px;
+      background: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+      top: -18%;
+      right: 8%;
+      animation-duration: 26s;
+    }
+
+    .orb-2 {
+      width: 380px;
+      height: 380px;
+      background: linear-gradient(225deg, #7c3aed 0%, #a855f7 100%);
+      bottom: -12%;
+      left: 4%;
+      animation-duration: 32s;
+      animation-delay: -8s;
+    }
+
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: linear-gradient(90deg, #c084fc 0%, #a78bfa 100%);
+      top: 38%;
+      left: 18%;
+      animation-duration: 19s;
+      animation-delay: -14s;
+      opacity: 0.4;
+    }
+
+    @keyframes orb-float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -25px) scale(1.04); }
+      66% { transform: translate(-25px, 22px) scale(0.97); }
+    }
+
+    .floating-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(167, 139, 250, 0.25);
+      animation: float-dot 14s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes float-dot {
+      0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
+      25% { transform: translateY(-45px) translateX(18px); opacity: 0.55; }
+      50% { transform: translateY(-18px) translateX(-22px); opacity: 0.25; }
+      75% { transform: translateY(-55px) translateX(12px); opacity: 0.45; }
+    }
+
+    .cinematic-gradient {
+      background: radial-gradient(circle at 50% 30%, rgba(167,139,250,0.07) 0%, transparent 55%);
+      animation: subtle-drift 40s ease infinite;
+    }
+
+    @keyframes subtle-drift {
+      0%, 100% { background-position: 40% 35%; }
+      50% { background-position: 60% 65%; }
+    }
+
+    /* Base project card styles - height controlled by content + media aspect */
+    .project-card {
+      position: relative;
+      overflow: hidden;
+      height: auto;
+      align-self: start;
+      border: 1px solid rgba(255,255,255,0.07);
+      background: #0a0a0f;
+      border-radius: 16px;
+      transition: transform 0.5s cubic-bezier(0.23, 1.0, 0.32, 1),
+                  box-shadow 0.5s cubic-bezier(0.23, 1.0, 0.32, 1),
+                  border-color 0.4s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(167, 139, 250, 0.35);
+      box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.4),
+                  0 0 0 1px rgba(167, 139, 250, 0.15);
+    }
+
+    .project-card .overlay {
+      transition: opacity 0.5s ease;
+    }
+
+    .project-card:hover .overlay {
+      opacity: 0.85;
+    }
+
+    .project-card .glow-line {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(167,139,250,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .project-card:hover .glow-line {
+      opacity: 1;
+    }
+
+    .service-card {
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(167, 139, 250, 0.28);
+      background: #111114;
+      box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.3);
+    }
+
+    .service-card .icon-wrap {
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+                  background 0.3s ease;
+    }
+
+    .service-card:hover .icon-wrap {
+      transform: scale(1.06) rotate(2deg);
+      background: rgba(167, 139, 250, 0.12);
+    }
+
+    .process-step {
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .process-step:hover {
+      transform: translateY(-3px);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s cubic-bezier(0.23, 1.0, 0.32, 1),
+                  transform 0.7s cubic-bezier(0.23, 1.0, 0.32, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .modal {
+      animation: modalEnter 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes modalEnter {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .nav-sticky {
+      background: rgba(5, 5, 7, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.3s ease;
+    }
+
+    .nav-scrolled {
+      background: rgba(5, 5, 7, 0.95);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      box-shadow: 0 4px 30px -10px rgb(0 0 0 / 0.3);
+    }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(to right, #a78bfa, #c084fc);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover:after {
+      width: 100%;
+    }
+
+    .film-grain {
+      background-image: 
+        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+      background-size: 3px 3px;
+      pointer-events: none;
+      mix-blend-mode: screen;
+    }
+
+    .btn-primary {
+      transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #d8ccff 0%, #c4b5fd 42%, #b794f4 100%);
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 
+        0 0 0 1px rgba(167, 139, 250, 0.25),
+        0 12px 32px -8px rgba(167, 139, 250, 0.55),
+        0 0 18px rgba(192, 132, 252, 0.4),
+        0 0 35px rgba(167, 139, 250, 0.22),
+        inset 0 1.5px 0 rgba(255,255,255,0.55),
+        inset 0 -2.5px 3px rgba(70, 45, 130, 0.45),
+        inset 1px 0 1.5px rgba(255,255,255,0.3);
+    }
+
+    .btn-primary:after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -100%;
+      width: 40%; height: 200%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.45),
+        transparent
+      );
+      transition: left 0.7s;
+    }
+
+    .btn-primary:hover:after {
+      left: 250%;
+    }
+
+    .btn-secondary {
+      transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #d8ccff 0%, #c4b5fd 45%, #b794f4 100%);
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 
+        0 0 0 1px rgba(167, 139, 250, 0.2),
+        0 8px 24px -6px rgba(167, 139, 250, 0.45),
+        0 0 14px rgba(192, 132, 252, 0.35),
+        inset 0 1.5px 0 rgba(255,255,255,0.5),
+        inset 0 -2px 2.5px rgba(70, 45, 130, 0.4),
+        inset 1px 0 1px rgba(255,255,255,0.25);
+    }
+
+    /* Nav "Get in touch" buttons get purple hover with inner bevel too */
+    a[href="#contact"] {
+      transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    a[href="#contact"]:hover {
+      background: linear-gradient(135deg, #d8ccff 0%, #c4b5fd 45%, #b794f4 100%);
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.45);
+      box-shadow: 
+        0 0 0 1px rgba(167, 139, 250, 0.2),
+        0 4px 12px -2px rgba(167, 139, 250, 0.4),
+        inset 0 1px 0 rgba(255,255,255,0.5),
+        inset 0 -1.5px 2px rgba(70, 45, 130, 0.4);
+    }
+
+    /* Cleaned old animation styles to fix bugs */
+
+    .hero-light {
+      position: absolute;
+      top: 25%;
+      left: -30%;
+      width: 60%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(167,139,250,0.35), transparent);
+      animation: hero-streak 7s ease-in-out infinite;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    @keyframes hero-streak {
+      0%, 100% { transform: translateX(0); opacity: 0.2; }
+      40% { transform: translateX(320%); opacity: 0.55; }
+      60% { transform: translateX(320%); opacity: 0.55; }
+      100% { transform: translateX(420%); opacity: 0; }
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 1px;
+      background: linear-gradient(to right, #a78bfa, #c084fc);
+      z-index: 100;
+      transition: width 0.1s ease-out;
+    }
+
+    /* Compact Premium Tab System */
+    .work-tabs {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 24px;
+    }
+
+    .work-tab {
+      flex-shrink: 0;
+    }
+
+    .work-tab {
+      padding: 10px 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(10, 10, 15, 0.6);
+      backdrop-filter: blur(10px);
+      color: #c4b5fd;
+      transition: all 0.3s cubic-bezier(0.23, 1.0, 0.32, 1);
+      white-space: nowrap;
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.05);
+    }
+
+    .work-tab:hover {
+      background: linear-gradient(135deg, #d8ccff 0%, #c4b5fd 42%, #b794f4 100%);
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 
+        0 0 0 1px rgba(167, 139, 250, 0.2),
+        0 6px 18px -4px rgba(167, 139, 250, 0.4),
+        0 0 12px rgba(192, 132, 252, 0.3),
+        inset 0 1.5px 0 rgba(255,255,255,0.5),
+        inset 0 -2px 2.5px rgba(70, 45, 130, 0.4),
+        inset 1px 0 1px rgba(255,255,255,0.25);
+    }
+
+    .work-tab.active {
+      background: linear-gradient(135deg, #d1c1f8 0%, #a78bfa 45%, #c4b5fd 100%);
+      color: white;
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.25),
+        0 0 12px rgba(167, 139, 250, 0.6),
+        0 0 26px rgba(192, 132, 252, 0.35),
+        inset 0 1.5px 0 rgba(255,255,255,0.55),
+        inset 0 -2px 3px rgba(70, 45, 130, 0.45),
+        inset 1px 0 1.5px rgba(255,255,255,0.3);
+    }
+
+    .work-tab:not(.active) {
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.1);
+    }
+
+    /* Global floating "available to work" badge */
+    .available-floating {
+      position: fixed;
+      bottom: 22px;
+      left: 22px;
+      z-index: 55;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 13px;
+      border-radius: 9999px;
+      background: rgba(10, 10, 15, 0.82);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 1.6px;
+      text-transform: lowercase;
+      color: #c4b5fd;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35),
+                  0 0 0 1px rgba(167, 139, 250, 0.06);
+      opacity: 0;
+      transform: translateX(-12px) scale(0.96);
+      transition: opacity 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+                  transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      pointer-events: auto;
+      user-select: none;
+    }
+
+    .available-floating.show:hover {
+      border-color: rgba(167, 139, 250, 0.22);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+      transform: translateX(0) scale(1.01);
+    }
+
+    /* Small pill buttons (like the 'All' filter) get purple hover too */
+    .pill-btn:hover {
+      background: linear-gradient(135deg, #d8ccff 0%, #c4b5fd 45%, #b794f4 100%);
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.4);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 0 8px rgba(167,139,250,0.3);
+    }
+
+    .available-floating.show {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+
+    /* LTR sweep animation for the text */
+    .available-floating.show span {
+      animation: ltrSweep 680ms cubic-bezier(0.23, 1, 0.32, 1) both;
+    }
+
+    @keyframes ltrSweep {
+      from {
+        opacity: 0;
+        transform: translateX(-18px);
+        clip-path: inset(0 100% 0 0);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+        clip-path: inset(0 0 0 0);
+      }
+    }
+
+    .available-floating .dot {
+      width: 6.5px;
+      height: 6.5px;
+      background: #4ade80;
+      border-radius: 9999px;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.2);
+      animation: dot-blink 2.2s infinite ease-in-out;
+    }
+
+    .available-floating .dot::after {
+      content: '';
+      position: absolute;
+      inset: -5px;
+      border-radius: 9999px;
+      background: rgba(74, 222, 128, 0.32);
+      filter: blur(5px);
+      z-index: -1;
+      animation: deep-glow 2.6s infinite ease-in-out;
+    }
+
+    @keyframes dot-blink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.9); }
+    }
+
+    @keyframes deep-glow {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.9; transform: scale(1.7); }
+    }
+
+    .available-floating span {
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .available-floating {
+        bottom: 16px;
+        left: 16px;
+        padding: 5px 10px;
+        font-size: 0.58rem;
+        gap: 5px;
+      }
+      .available-floating .dot {
+        width: 5.5px;
+        height: 5.5px;
+      }
+    }
+
+    /* Projects grid */
+    #projects-grid {
+      display: grid;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* SaaS Editing Style (All) — shows ALL projects:
+       - Horizontals section first (top)
+       - Then verticals section below in dense layout
+       Vertical cards are intentionally smaller (5 per row on desktop) so they don't dominate height.
+       Order strictly H then V. Both sections use grid so everything is responsive. */
+    #projects-grid.all-view {
+      display: block;
+    }
+
+    .horiz-section {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .verts-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    /* Ensure media fills its parent cell in these sections */
+    #projects-grid.all-view .project-media {
+      width: 100%;
+    }
+
+    /* Horizontal tab */
+    #projects-grid.horizontal-layout {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    /* Vertical tab - side by side */
+    #projects-grid.vertical-layout {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+
+    .project-media {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      background: #111114;
+      border-radius: 12px;
+    }
+
+    .vertical-media {
+      aspect-ratio: 9 / 16;
+    }
+
+    .horizontal-media {
+      aspect-ratio: 16 / 9;
+    }
+
+    .project-media video,
+    .project-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-card {
+      height: auto;
+      align-self: start;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), 
+                  box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+                  border-color 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0a0a0f;
+      border-radius: 12px;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(167,139,250,0.4);
+      box-shadow: 0 15px 30px -10px rgb(0 0 0 / 0.35),
+                  0 0 0 1px rgba(167,139,250,0.2);
+    }
+
+    .project-card .p-5 {
+      padding: 12px 14px;
+    }
+
+    /* Deep glow behind project cards */
+    .project-card {
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08),
+                  0 0 25px rgba(167, 139, 250, 0.15);
+    }
+
+    .project-card:hover {
+      box-shadow: 0 15px 30px -10px rgb(0 0 0 / 0.35),
+                  0 0 0 1px rgba(167,139,250,0.2),
+                  0 0 40px rgba(167, 139, 250, 0.35),
+                  0 0 70px rgba(167, 139, 250, 0.2);
+    }
+  </style>
+</head>
+<body class="cinematic-bg text-zinc-200 selection:bg-violet-500/30">
+  <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+  <div id="scroll-progress" class="scroll-progress" style="width: 0%" role="progressbar" aria-hidden="true"></div>
+
+  <nav id="nav" class="fixed top-0 left-0 right-0 z-50 border-b border-white/10" aria-label="Principal">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="flex items-center justify-between h-20">
+        <a href="#" class="flex items-center gap-x-3" aria-label="Fernansmotion, inicio">
+          <div class="relative flex items-center justify-center w-9 h-9" aria-hidden="true">
+            <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-xl blur-md opacity-60"></div>
+            <div class="relative w-9 h-9 bg-zinc-950 rounded-xl flex items-center justify-center border border-white/20">
+              <span class="font-display text-2xl font-semibold tracking-[-2px] bg-gradient-to-br from-white to-zinc-400 bg-clip-text text-transparent">F</span>
+            </div>
+          </div>
+          <div>
+            <div class="font-display text-2xl font-semibold tracking-[-1.5px]">fernansmotion</div>
+            <div class="text-[10px] text-zinc-400 -mt-1 tracking-[1.5px]">EST 2016</div>
+          </div>
+        </a>
+
+        <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+          <a href="#work" class="nav-link text-zinc-200 hover:text-white px-1 py-1">Proyectos</a>
+          <a href="#services" class="nav-link text-zinc-200 hover:text-white px-1 py-1">Servicios</a>
+          <a href="#process" class="nav-link text-zinc-200 hover:text-white px-1 py-1">Proceso</a>
+          <a href="#about" class="nav-link text-zinc-200 hover:text-white px-1 py-1">Sobre mí</a>
+        </div>
+
+        <div class="flex items-center gap-x-3">
+          <a href="#contact" 
+             class="hidden md:block px-6 py-2.5 text-sm rounded-2xl border border-white/15 hover:border-white/30 transition-colors font-medium">
+            Hablemos
+          </a>
+          <a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20me%20interesa%20trabajar%20contigo."
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Escribir por WhatsApp (abre en una pestaña nueva)"
+             class="px-6 py-2.5 text-sm font-semibold rounded-2xl bg-white text-black flex items-center gap-x-2 hover:bg-zinc-100 transition-all active:scale-[0.985]">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span class="hidden sm:inline">WhatsApp</span>
+          </a>
+
+          <button id="mobile-menu-btn"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="mobile-menu"
+                  aria-label="Abrir menú"
+                  class="md:hidden w-10 h-10 flex items-center justify-center text-white border border-white/10 rounded-2xl">
+            <i class="fas fa-bars text-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-[#050507]" role="navigation" aria-label="Móvil">
+      <div class="px-6 py-6 flex flex-col gap-y-1 text-base">
+        <a href="#work" class="mobile-link py-3 px-1 text-zinc-200">Proyectos</a>
+        <a href="#services" class="mobile-link py-3 px-1 text-zinc-200">Servicios</a>
+        <a href="#process" class="mobile-link py-3 px-1 text-zinc-200">Proceso</a>
+        <a href="#about" class="mobile-link py-3 px-1 text-zinc-200">Sobre mí</a>
+        <div class="pt-3 border-t border-white/10 mt-2">
+          <a href="#contact" class="block py-3 text-white font-medium">Hablemos</a>
+          <a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20me%20interesa%20trabajar%20contigo."
+             target="_blank"
+             rel="noopener noreferrer"
+             class="mt-2 flex items-center justify-center py-3.5 rounded-2xl bg-white text-black font-semibold">
+            <i class="fab fa-whatsapp mr-2" aria-hidden="true"></i>
+            Escríbeme por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header class="relative pt-20 pb-16 md:pb-24 min-h-[100dvh] flex items-center overflow-hidden" aria-label="Hero">
+    <div class="absolute inset-0 cinematic-gradient"></div>
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+
+    <div class="floating-dot" style="top: 28%; left: 14%; animation-delay: -2s;" aria-hidden="true"></div>
+    <div class="floating-dot" style="top: 52%; left: 22%;" aria-hidden="true"></div>
+    <div class="floating-dot" style="top: 41%; right: 26%; animation-delay: -7s;" aria-hidden="true"></div>
+
+    <div class="hero-light" aria-hidden="true"></div>
+
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_40%,rgba(0,0,0,0.65)_78%)]"></div>
+
+    <div class="relative max-w-screen-2xl mx-auto px-6 pt-12 md:pt-8">
+      <div class="grid md:grid-cols-12 gap-x-8 items-center">
+        
+        <div class="md:col-span-7 lg:col-span-7">
+          <div class="inline-flex items-center gap-x-2 rounded-full border border-white/10 bg-white/5 px-4 py-1 text-xs tracking-[2px] mb-8">
+            <div class="w-1.5 h-1.5 bg-violet-400 rounded-full animate-pulse" aria-hidden="true"></div>
+            <span class="font-medium text-violet-200">AGENDA ABIERTA PARA PROYECTOS 2026</span>
+          </div>
+
+          <h1 class="heading-xl font-display tracking-tighter leading-[0.9] mb-6">
+            Movimiento que<br>
+            <span class="gradient-text">
+              <span class="animated-phrase-wrapper">
+                <span id="hero-phrase" aria-live="polite">se queda contigo</span>
+              </span>
+            </span>
+          </h1>
+
+          <p class="max-w-[38ch] text-[17px] md:text-[18px] text-zinc-300 leading-snug mb-10">
+            Diseño motion cinematográfico, piezas de marca y video de alto impacto
+            para marcas con ambición y momentos que marcan cultura.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#work" 
+               class="btn-primary inline-flex items-center justify-center gap-3 rounded-3xl bg-white text-black font-semibold h-14 px-8 text-[15px]">
+              Ver los proyectos
+              <i class="fas fa-arrow-right text-sm" aria-hidden="true"></i>
+            </a>
+
+            <a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20quiero%20conversar%20sobre%20un%20proyecto."
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn-secondary inline-flex items-center justify-center gap-3 rounded-3xl border border-white/20 hover:border-violet-400/40 h-14 px-7 text-[15px] font-medium">
+              <i class="fab fa-whatsapp text-lg" aria-hidden="true"></i>
+              <span>Escríbeme por WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="mt-14 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-zinc-400 tracking-widest">
+            <div>HAN CONFIADO EN MÍ</div>
+            <div class="flex flex-wrap gap-x-6 text-zinc-300 font-medium">
+              <span>LANCO</span>
+              <span>DIGO</span>
+              <span>LA SIRENA</span>
+              <span>APEX</span>
+              <span>JCC 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 lg:col-span-5 mt-12 md:mt-0">
+          <div class="relative group">
+            <div class="relative aspect-[16/10.2] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+              <img src="https://picsum.photos/id/1015/900/580" 
+                   width="900"
+                   height="580"
+                   fetchpriority="high"
+                   decoding="async"
+                   class="media absolute inset-0 w-full h-full object-cover" 
+                   alt="Fotograma cinematográfico del showreel de Fernansmotion">
+              
+              <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/70" aria-hidden="true"></div>
+              <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/10" aria-hidden="true"></div>
+
+              <div class="film-grain absolute inset-0 opacity-30" aria-hidden="true"></div>
+
+              <button type="button" onclick="playHeroReel()" 
+                      aria-label="Reproducir el avance del showreel 2025"
+                      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center w-20 h-20 rounded-full bg-white text-black shadow-[0_0_0_12px_rgba(255,255,255,0.15)] hover:scale-105 active:scale-95 transition-all duration-300">
+                <i class="fas fa-play ml-1 text-3xl" aria-hidden="true"></i>
+              </button>
+
+              <div class="absolute bottom-6 left-6 right-6 flex items-end justify-between text-xs">
+                <div>
+                  <div class="font-mono text-[11px] tracking-[2px] text-white/80">SHOWREEL 2025</div>
+                  <div class="font-display text-xl tracking-tight">02:41</div>
+                </div>
+                <div class="px-3 py-1 rounded-2xl border border-white/20 bg-black/50 backdrop-blur-md text-[11px] tracking-[1.5px]">
+                  4K • 60FPS • HDR
+                </div>
+              </div>
+            </div>
+
+            <div class="absolute -bottom-4 -right-3 px-5 py-2 bg-zinc-950 border border-white/10 rounded-2xl text-xs flex items-center gap-x-2 shadow-xl">
+              <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" aria-hidden="true"></div>
+              <span class="font-medium">Seleccionado en JCC 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+  <div class="border-y border-white/10">
+    <div class="max-w-screen-2xl mx-auto px-6 py-7">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 text-center md:text-left">
+        <div class="reveal">
+          <div class="font-display text-5xl tracking-tighter">180</div>
+          <div class="text-sm text-zinc-300 mt-1">proyectos<br>entregados</div>
+        </div>
+        <div class="reveal">
+          <div class="font-display text-5xl tracking-tighter">42</div>
+          <div class="text-sm text-zinc-300 mt-1">campañas<br>de marca</div>
+        </div>
+        <div class="reveal">
+          <div class="font-display text-5xl tracking-tighter">11</div>
+          <div class="text-sm text-zinc-300 mt-1">países</div>
+        </div>
+        <div class="reveal">
+          <div class="font-display text-5xl tracking-tighter">9</div>
+          <div class="text-sm text-zinc-300 mt-1">premios<br>del sector</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="work" class="max-w-screen-2xl mx-auto px-6 pt-16 pb-12" aria-labelledby="work-heading">
+    <div class="mb-6 text-center">
+      <div class="uppercase text-xs tracking-[2.5px] font-medium text-violet-300 mb-2">TRABAJO DESTACADO</div>
+      <h2 id="work-heading" class="heading-lg font-display">Proyectos</h2>
+    </div>
+
+    <div class="work-tabs" role="tablist" aria-label="Filtrar proyectos por formato">
+      <button type="button" onclick="filterByCategory('saas')" id="tab-saas"
+              role="tab" aria-selected="true" aria-controls="projects-grid"
+              class="work-tab active">
+        Todos
+      </button>
+      <button type="button" onclick="filterByCategory('vertical')" id="tab-vertical"
+              role="tab" aria-selected="false" aria-controls="projects-grid"
+              class="work-tab">
+        Vertical
+      </button>
+      <button type="button" onclick="filterByCategory('horizontal')" id="tab-horizontal"
+              role="tab" aria-selected="false" aria-controls="projects-grid"
+              class="work-tab">
+        Horizontal
+      </button>
+    </div>
+
+    <div class="mb-4 flex items-center justify-between px-1">
+      <div class="text-sm text-zinc-300" id="filter-status" aria-live="polite">Todos los proyectos</div>
+      <button type="button" onclick="filterByCategory('all')"
+              class="text-xs px-3 py-1 rounded-full border border-white/10 hover:bg-white/5 transition-colors text-violet-200 pill-btn">
+        Ver todo
+      </button>
+    </div>
+
+    <div id="projects-grid" role="tabpanel" aria-label="Galería de proyectos">
+      <!-- Se llena dinámicamente con JS -->
+    </div>
+  </section>
+
+  <section id="services" class="border-t border-white/10 bg-zinc-950">
+    <div class="max-w-screen-2xl mx-auto px-6 py-20">
+      <div class="mb-10">
+        <div class="uppercase text-xs tracking-[2px] font-medium text-zinc-500 mb-2">LO QUE HAGO</div>
+        <h2 class="heading-lg font-display">Servicios</h2>
+        <p class="max-w-md mt-3 text-zinc-400">Motion de principio a fin, hecho a la medida de lo que tu marca necesita.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        
+        <div class="service-card p-7 rounded-3xl border border-white/10 bg-zinc-950/50 flex gap-5 reveal">
+          <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl">
+            <i class="fas fa-magic text-violet-400"></i>
+          </div>
+          <div>
+            <div class="font-semibold mb-1.5">Motion Graphics</div>
+            <div class="text-sm text-zinc-400 leading-snug">Tipografía cinética, infografías, interfaces animadas y sistemas de motion a la medida.</div>
+          </div>
+        </div>
+
+        <div class="service-card p-7 rounded-3xl border border-white/10 bg-zinc-950/50 flex gap-5 reveal">
+          <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl">
+            <i class="fas fa-film text-violet-400"></i>
+          </div>
+          <div>
+            <div class="font-semibold mb-1.5">Edición de Video</div>
+            <div class="text-sm text-zinc-400 leading-snug">Edición cinematográfica, ritmo, color con intención y construcción narrativa.</div>
+          </div>
+        </div>
+
+        <div class="service-card p-7 rounded-3xl border border-white/10 bg-zinc-950/50 flex gap-5 reveal">
+          <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl">
+            <i class="fas fa-bolt text-violet-400"></i>
+          </div>
+          <div>
+            <div class="font-semibold mb-1.5">Anuncios para Redes</div>
+            <div class="text-sm text-zinc-400 leading-snug">Piezas verticales y horizontales pensadas para rendir en cada plataforma.</div>
+          </div>
+        </div>
+
+        <div class="service-card p-7 rounded-3xl border border-white/10 bg-zinc-950/50 flex gap-5 reveal">
+          <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl">
+            <i class="fas fa-signature text-violet-400"></i>
+          </div>
+          <div>
+            <div class="font-semibold mb-1.5">Animación de Marca</div>
+            <div class="text-sm text-zinc-400 leading-snug">Revelados de logo, sistemas de motion para tu identidad y kits de intro y cierre.</div>
+          </div>
+        </div>
+
+        <div class="service-card p-7 rounded-3xl border border-white/10 bg-zinc-950/50 flex gap-5 reveal">
+          <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-xl">
+            <i class="fas fa-cube text-violet-400"></i>
+          </div>
+          <div>
+            <div class="font-semibold mb-1.5">3D y Producto</div>
+            <div class="text-sm text-zinc-400 leading-snug">Renders fotorrealistas, entornos 3D y visuales comerciales de alto nivel.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="max-w-screen-2xl mx-auto px-6 py-20">
+    <div class="max-w-2xl mb-12">
+      <div class="uppercase text-xs tracking-[2px] font-medium text-zinc-500 mb-2">EL OFICIO</div>
+      <h2 class="heading-lg font-display">Cómo trabajo</h2>
+      <p class="text-zinc-400 mt-3 text-[15px]">Un proceso colaborativo y afinado, pensado para dar claridad y resultados que se notan.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+      <div class="process-step bg-zinc-950 border border-white/10 rounded-3xl p-7 reveal">
+        <div class="process-number font-display text-7xl text-white/10 tracking-[-5px] mb-4">01</div>
+        <div class="font-semibold text-lg tracking-tight mb-2">Descubrimiento y Dirección</div>
+        <p class="text-sm text-zinc-400">Alineamos objetivos, referencias, tono e intención emocional. Armo mood films y referencias visuales.</p>
+      </div>
+
+      <div class="process-step bg-zinc-950 border border-white/10 rounded-3xl p-7 reveal">
+        <div class="process-number font-display text-7xl text-white/10 tracking-[-5px] mb-4">02</div>
+        <div class="font-semibold text-lg tracking-tight mb-2">Concepto y Storyboard</div>
+        <p class="text-sm text-zinc-400">Desarrollo storyboards, mapas de tiempo y animatics para definir el ritmo y la jerarquía visual.</p>
+      </div>
+
+      <div class="process-step bg-zinc-950 border border-white/10 rounded-3xl p-7 reveal">
+        <div class="process-number font-display text-7xl text-white/10 tracking-[-5px] mb-4">03</div>
+        <div class="font-semibold text-lg tracking-tight mb-2">Animación y Edición</div>
+        <p class="text-sm text-zinc-400">Aquí ocurre todo: motion graphics, 3D y edición. Entrego rondas semanales con tiempos claros.</p>
+      </div>
+
+      <div class="process-step bg-zinc-950 border border-white/10 rounded-3xl p-7 reveal">
+        <div class="process-number font-display text-7xl text-white/10 tracking-[-5px] mb-4">04</div>
+        <div class="font-semibold text-lg tracking-tight mb-2">Pulido y Acabado</div>
+        <p class="text-sm text-zinc-400">Diseño sonoro, colorización, ajuste tipográfico y entrega técnica en todos los formatos.</p>
+      </div>
+
+      <div class="process-step bg-zinc-950 border border-white/10 rounded-3xl p-7 reveal">
+        <div class="process-number font-display text-7xl text-white/10 tracking-[-5px] mb-4">05</div>
+        <div class="font-semibold text-lg tracking-tight mb-2">Entrega y Materiales</div>
+        <p class="text-sm text-zinc-400">Masters finales, paquetes de archivos organizados, plantillas y guía de motion para tu equipo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section-bg border-y border-white/10 py-20">
+    <div class="max-w-screen-2xl mx-auto px-6">
+      <div class="grid md:grid-cols-12 gap-x-12 items-center">
+        
+        <div class="md:col-span-7">
+          <div class="reveal">
+            <div class="uppercase text-xs tracking-[2px] font-medium text-zinc-500 mb-2">EL ESTUDIO</div>
+            <h2 class="heading-lg font-display mb-8">Diseño el tiempo.<br>Cuadro a cuadro.</h2>
+
+            <div class="max-w-[48ch] text-zinc-300 text-[15px] leading-relaxed space-y-4">
+              <p>Soy Fernan — motion designer y editor de video con más de nueve años construyendo historias visuales de alto nivel para marcas del Caribe y Latinoamérica.</p>
+              <p>Mi trabajo vive donde se cruzan la publicidad, la cultura y el oficio cinematográfico. Para mí, el buen motion no solo se ve bien: se siente inevitable.</p>
+            </div>
+
+            <div class="mt-10 flex flex-wrap gap-3">
+              <div class="px-6 py-2 text-sm rounded-2xl border border-white/10 bg-white/5">+9 años de experiencia</div>
+              <div class="px-6 py-2 text-sm rounded-2xl border border-white/10 bg-white/5">Caribe y LATAM</div>
+              <div class="px-6 py-2 text-sm rounded-2xl border border-white/10 bg-white/5">Trabajo remoto, alcance global</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 mt-12 md:mt-0 reveal">
+          <div class="aspect-square md:aspect-auto md:h-full rounded-3xl overflow-hidden border border-white/10 relative">
+            <img src="https://picsum.photos/id/1005/900/900" 
+                 class="absolute inset-0 w-full h-full object-cover grayscale-[0.2]" 
+                 alt="Fernan Valdez, motion designer en Santo Domingo">
+            <div class="absolute inset-0 bg-gradient-to-br from-black/60 via-black/20 to-transparent"></div>
+            
+            <div class="absolute bottom-7 left-7 text-sm">
+              <div class="text-xs tracking-widest text-white/60">SANTO DOMINGO, RD</div>
+              <div class="font-display text-3xl tracking-tighter">Fernan Valdez</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="max-w-screen-2xl mx-auto px-6 py-24">
+    <div class="max-w-4xl mx-auto text-center">
+      <div class="text-violet-400 text-xs tracking-[2px] font-semibold mb-4">TU PRÓXIMO PROYECTO</div>
+
+      <h2 class="heading-lg font-display tracking-tighter mb-5">Hagamos algo que<br>nadie olvide.</h2>
+      <p class="max-w-md mx-auto text-lg text-zinc-400">Estoy tomando proyectos seleccionados para 2026. Escríbeme y vemos cómo lo hacemos realidad.</p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
+        <a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20me%20interesa%20trabajar%20contigo%20en%20un%20proyecto%20de%20motion."
+           target="_blank"
+           class="btn-primary group inline-flex items-center justify-center gap-x-3 px-10 py-4 rounded-3xl bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-400 hover:to-fuchsia-400 text-white font-semibold text-base active:scale-[0.985] transition-all shadow-lg shadow-violet-900/30">
+          <i class="fab fa-whatsapp text-xl"></i>
+          <span>Escríbeme por WhatsApp</span>
+        </a>
+        
+        <a href="mailto:fernansmotion@hotmail.com" 
+           class="inline-flex items-center justify-center gap-x-3 px-10 py-4 rounded-3xl border border-white/15 hover:bg-white/5 font-semibold text-base transition-colors">
+          <i class="far fa-envelope"></i>
+          <span>Enviar un correo</span>
+        </a>
+      </div>
+
+      <div class="mt-16 text-xs text-zinc-500 tracking-widest">RESPONDO EN MENOS DE 24 HORAS</div>
+    </div>
+  </section>
+
+  <footer class="border-t border-white/10 py-9">
+    <div class="max-w-screen-2xl mx-auto px-6 flex flex-col md:flex-row gap-y-4 items-center justify-between text-sm text-zinc-500">
+      <div>© 2026 Fernan Valdez. Todos los derechos reservados.</div>
+      <div class="flex gap-x-6">
+        <a href="#" class="hover:text-white transition-colors">Instagram</a>
+        <a href="#" class="hover:text-white transition-colors">Behance</a>
+        <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+      </div>
+      <div class="text-xs">Santo Domingo • República Dominicana</div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20quiero%20conversar%20sobre%20un%20proyecto%20de%20motion."
+     target="_blank"
+     class="fixed bottom-6 right-6 z-[60] flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] active:scale-95 transition-all shadow-xl shadow-black/50 px-5 py-3.5 rounded-3xl text-white font-semibold text-sm group">
+    <i class="fab fa-whatsapp text-xl"></i>
+    <span class="hidden sm:inline">Escríbeme por WhatsApp</span>
+    <span class="sm:hidden">WhatsApp</span>
+  </a>
+
+  <!-- Badge flotante global "disponible" — fijo en la esquina, aparece al hacer scroll -->
+  <div id="available-floating" class="available-floating">
+    <div class="dot"></div>
+    <span>disponible para proyectos</span>
+  </div>
+
+  <div onclick="closeModal()" id="modal-backdrop" class="hidden fixed inset-0 bg-black/70 backdrop-blur z-[70]"></div>
+  <div onclick="event.target.id==='modal' && closeModal()" id="modal" class="hidden fixed inset-0 z-[80] items-center justify-center p-5">
+    <div onclick="event.stopImmediatePropagation()" class="modal w-full max-w-2xl bg-zinc-950 border border-white/10 rounded-3xl overflow-hidden">
+      
+      <div id="modal-thumb" class="relative aspect-video bg-zinc-900 flex items-center justify-center">
+        <video id="modal-video" class="w-full h-full" controls muted></video>
+        <div id="modal-badge" class="absolute top-4 left-4 px-3.5 py-1 text-xs font-semibold tracking-wider rounded-full bg-black/70 border border-white/10 backdrop-blur"></div>
+      </div>
+      
+      <div class="p-7">
+        <div class="flex justify-between gap-3 items-start">
+          <div>
+            <div id="modal-client" class="text-sm text-violet-400 font-medium"></div>
+            <div id="modal-title" class="font-display text-3xl tracking-tight leading-none mt-1"></div>
+          </div>
+          <div id="modal-duration" class="text-sm px-3 py-1 bg-zinc-900 border border-white/10 rounded-2xl text-center font-mono"></div>
+        </div>
+
+        <div id="modal-description" class="mt-5 text-zinc-300 leading-relaxed"></div>
+
+        <div class="mt-6 flex flex-wrap gap-2" id="modal-tags"></div>
+
+        <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
+          <button onclick="closeModal()" 
+                  class="px-5 h-11 text-sm font-medium rounded-2xl border border-white/10 hover:bg-white/5 transition-colors">
+            Cerrar
+          </button>
+          <a id="modal-whatsapp-link" href="#" target="_blank"
+             class="px-5 h-11 flex items-center text-sm font-semibold bg-white text-black rounded-2xl hover:bg-zinc-100">
+            <i class="fab fa-whatsapp mr-2"></i>
+            <span>Hablemos de este proyecto</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function configureTailwind() {
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      };
+    }
+
+    function initScrollProgress() {
+      const progress = document.getElementById('scroll-progress');
+      
+      window.addEventListener('scroll', () => {
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollTop = window.scrollY;
+        const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        progress.style.width = percent + '%';
+      }, { passive: true });
+    }
+
+    function initNav() {
+      const nav = document.getElementById('nav');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+          nav.classList.add('nav-sticky');
+          if (window.scrollY > 120) {
+            nav.classList.add('nav-scrolled');
+          } else {
+            nav.classList.remove('nav-scrolled');
+          }
+        } else {
+          nav.classList.remove('nav-sticky', 'nav-scrolled');
+        }
+      }, { passive: true });
+
+      const mobileBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (mobileBtn && mobileMenu) {
+        mobileBtn.addEventListener('click', () => {
+          const isHidden = mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden');
+          
+          if (isHidden) {
+            mobileBtn.innerHTML = '<i class="fas fa-times"></i>';
+          } else {
+            mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          }
+        });
+
+        document.querySelectorAll('.mobile-link').forEach(link => {
+          link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          });
+        });
+      }
+    }
+
+    /* Old animation functions removed to fix bugs and blank space. */
+
+    /* =====================================================
+       ONLY HERO HEADING ANIMATION - Second line phrase rotation
+       Premium cinematic cycling for "Motion that [phrase]"
+       Stable first line. Dynamic second line.
+       ===================================================== */
+    function initHeroHeadingAnimation() {
+      const phraseEl = document.getElementById('hero-phrase');
+      if (!phraseEl) return;
+
+      // Guard against double initialization
+      if (phraseEl.dataset.animStarted) return;
+      phraseEl.dataset.animStarted = 'true';
+
+      // Small subtle entrance animation for the initial phrase so it's not completely static
+      // (does not hide the text)
+      setTimeout(() => {
+        const origTransition = phraseEl.style.transition;
+        phraseEl.style.transition = 'none';
+        phraseEl.style.transform = 'translateY(4px)';
+        phraseEl.style.filter = 'blur(2px)';
+        void phraseEl.offsetWidth;
+        phraseEl.style.transition = `transform 450ms cubic-bezier(0.16, 1, 0.3, 1), filter 450ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        phraseEl.style.transform = 'translateY(0)';
+        phraseEl.style.filter = 'blur(0)';
+        setTimeout(() => {
+          if (origTransition) {
+            phraseEl.style.transition = origTransition;
+          }
+        }, 600);
+      }, 250);
+
+      const phrases = [
+        "se queda contigo",
+        "te mueve",
+        "deja huella",
+        "cuenta historias",
+        "marca el tiempo",
+        "se siente real",
+        "no se olvida",
+        "enamora"
+      ];
+
+      let index = 0;
+
+      function animatePhrase(newText) {
+        // Fade out (opacity + slide + blur) using only allowed properties
+        phraseEl.style.transition = `opacity 500ms cubic-bezier(0.16, 1, 0.3, 1), 
+                                     transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                                     filter 500ms cubic-bezier(0.16, 1, 0.3, 1)`;
+        phraseEl.style.opacity = '0';
+        phraseEl.style.transform = 'translateY(6px)';
+        phraseEl.style.filter = 'blur(4px)';
+
+        setTimeout(() => {
+          // Change text while invisible (no layout change)
+          phraseEl.textContent = newText;
+
+          // Force reset to out state (transition none) so in always starts from consistent hidden state
+          phraseEl.style.transition = 'none';
+          phraseEl.style.opacity = '0';
+          phraseEl.style.transform = 'translateY(6px)';
+          phraseEl.style.filter = 'blur(4px)';
+
+          void phraseEl.offsetWidth; // force reflow
+
+          // Animate in with smooth easing
+          phraseEl.style.transition = `opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), 
+                                       transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+                                       filter 600ms cubic-bezier(0.16, 1, 0.3, 1)`;
+          phraseEl.style.opacity = '1';
+          phraseEl.style.transform = 'translateY(0)';
+          phraseEl.style.filter = 'blur(0)';
+        }, 520);
+      }
+
+      function nextPhrase() {
+        index = (index + 1) % phrases.length;
+        animatePhrase(phrases[index]);
+      }
+
+      // Do NOT hide on load — keep the initial text visible immediately.
+      // The first cycle will handle a nice out/in transition.
+
+      // Start cycling after the user has time to read the first phrase.
+      // Reduced delay so the animation is visible sooner.
+      setTimeout(() => {
+        setInterval(nextPhrase, 2600);
+      }, 1200);
+    }
+
+    // Run the hero animation as soon as the script executes (DOM is parsed)
+    // This avoids relying only on window.onload for the heading
+    initHeroHeadingAnimation();
+
+    function initScrollReveals() {
+      const reveals = document.querySelectorAll('.reveal, .project-card, .service-card, .process-step');
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            const delay = (index % 4) * 80;
+            setTimeout(() => {
+              entry.target.classList.add('revealed');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -50px 0px"
+      });
+
+      reveals.forEach(el => {
+        if (!el.classList.contains('reveal')) el.classList.add('reveal');
+        observer.observe(el);
+      });
+    }
+
+    const projects = [
+      {
+        id: 0,
+        client: "VulnAudit",
+        title: "Reel 01",
+        year: "2025",
+        duration: "1:12",
+        type: "MOTION",
+        description: "Reel de motion cinematográfico: ritmo, textura y narrativa visual de principio a fin.",
+        video: "assets/Work/Vulnaudit-1.mp4",
+        tags: ["Motion", "Cinematográfico", "2D/3D"],
+        aspect: "horizontal"
+      },
+      {
+        id: 1,
+        client: "VulnAudit",
+        title: "Reel 02",
+        year: "2025",
+        duration: "0:55",
+        type: "3D",
+        description: "Visuales 3D de producto y marca con iluminación de alto nivel y animación milimétrica.",
+        video: "assets/Work/Vulnaudit-2.mp4",
+        tags: ["3D", "Producto", "VFX"],
+        aspect: "horizontal"
+      },
+      {
+        id: 2,
+        client: "Digo Network",
+        title: "Digo Network",
+        year: "2025",
+        duration: "0:45",
+        type: "MOTION",
+        description: "Paquete de motion graphics para una marca de tecnología y conectividad.",
+        video: "assets/Work/digonetwork.mp4",
+        tags: ["SaaS", "Tech", "Motion"],
+        aspect: "vertical"
+      },
+      {
+        id: 3,
+        client: "Lamarca",
+        title: "Reel Lamarca",
+        year: "2025",
+        duration: "1:10",
+        type: "MOTION",
+        description: "Narrativa de marca y visuales de producto para Lamarca.",
+        video: "assets/Work/Lamarca.mp4",
+        tags: ["Marca", "Comercial"],
+        aspect: "vertical"
+      },
+      {
+        id: 4,
+        client: "Paleta",
+        title: "Paleta de Colores",
+        year: "2025",
+        duration: "0:40",
+        type: "MOTION",
+        description: "Animación cromática vibrante para identidad de marca y contenido social.",
+        video: "assets/Work/Paleta de colores.mp4",
+        tags: ["Motion Graphics", "Color", "2D"],
+        aspect: "vertical"
+      },
+      {
+        id: 5,
+        client: "Premios",
+        title: "Campaña de Premios",
+        year: "2025",
+        duration: "1:05",
+        type: "MOTION",
+        description: "Visuales y edición para una campaña de premiación de alto nivel.",
+        video: "assets/Work/premios.mp4",
+        tags: ["Marca", "Premios"],
+        aspect: "vertical"
+      },
+      {
+        id: 6,
+        client: "Fernansmotion",
+        title: "Reel Principal",
+        year: "2025",
+        duration: "2:30",
+        type: "MOTION",
+        description: "Showreel completo con lo mejor de mi trabajo en motion y edición.",
+        video: "assets/Work/REEL .mp4",
+        tags: ["Reel", "Showcase"],
+        aspect: "vertical"
+      }
+    ];
+
+    function showProject(index) {
+      const project = projects[index];
+      const modal = document.getElementById('modal');
+      const backdrop = document.getElementById('modal-backdrop');
+
+      // Pause any preview videos when opening modal
+      const grid = document.getElementById('projects-grid');
+      if (grid) grid.querySelectorAll('video').forEach(v => { try { v.pause(); } catch(e){} });
+
+      document.getElementById('modal-client').textContent = project.client;
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-duration').textContent = project.duration;
+      document.getElementById('modal-description').textContent = project.description;
+
+      const tagsContainer = document.getElementById('modal-tags');
+      tagsContainer.innerHTML = project.tags.map(tag => 
+        `<div class="inline-block px-3 py-1 text-xs border border-white/10 rounded-2xl bg-zinc-900 text-zinc-400">${tag}</div>`
+      ).join('');
+
+      const waLink = document.getElementById('modal-whatsapp-link');
+      // Evita repetir el nombre del cliente cuando ya viene dentro del título
+      const nombre = project.title.toLowerCase().includes(project.client.toLowerCase())
+        ? project.title
+        : `${project.title} de ${project.client}`;
+      const msg = encodeURIComponent(`Hola Fernan, vi "${nombre}" en tu portafolio y me interesa hacer algo así.`);
+      waLink.href = `https://wa.me/18098047825?text=${msg}`;
+
+      const thumb = document.getElementById('modal-thumb');
+
+      // Always restore clean structure with video element + badge so we don't lose elements on image projects
+      thumb.innerHTML = `
+        <video id="modal-video" class="w-full h-full" controls muted></video>
+        <div id="modal-badge" class="absolute top-4 left-4 px-3.5 py-1 text-xs font-semibold tracking-wider rounded-full bg-black/70 border border-white/10 backdrop-blur"></div>
+      `;
+
+      // set badge text after structure restore
+      document.getElementById('modal-badge').textContent = project.type;
+
+      const video = document.getElementById('modal-video');
+
+      // Reset previous styles
+      thumb.style.aspectRatio = '';
+      thumb.style.maxHeight = '';
+      thumb.style.width = '';
+      thumb.style.maxWidth = '';
+      thumb.classList.remove('vertical-modal', 'aspect-video');
+
+      // set badge (re-set because we reset innerHTML)
+      document.getElementById('modal-badge').textContent = project.type;
+
+      if (project.video) {
+        video.src = project.video;
+        video.muted = false; // allow sound in modal (user can control via UI)
+        video.style.objectFit = 'contain'; // show the full video without cropping
+        video.style.display = 'block';
+
+        const asp = project.aspect || 'horizontal';
+        if (asp === 'vertical') {
+          thumb.style.aspectRatio = '9 / 16';
+          thumb.style.maxHeight = '70vh';
+          thumb.style.maxWidth = 'min(320px, 85vw)';
+          thumb.style.margin = '0 auto';
+          thumb.classList.add('vertical-modal');
+        } else {
+          thumb.style.aspectRatio = '16 / 9';
+        }
+
+        // Play the modal video
+        video.play().catch(() => {});
+      } else {
+        video.style.display = 'none';
+        thumb.style.backgroundImage = `url(https://picsum.photos/id/201/1400/788)`;
+        thumb.style.backgroundSize = 'cover';
+        thumb.style.backgroundPosition = 'center';
+        thumb.style.aspectRatio = '16 / 9';
+      }
+
+      backdrop.style.display = 'block';
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      const backdrop = document.getElementById('modal-backdrop');
+      const video = document.getElementById('modal-video');
+      
+      if (video) {
+        video.pause();
+        video.src = '';
+        video.style.objectFit = '';
+      }
+      
+      const thumb = document.getElementById('modal-thumb');
+      if (thumb) {
+        thumb.style.aspectRatio = '';
+        thumb.style.maxHeight = '';
+        thumb.style.width = '';
+        thumb.style.maxWidth = '';
+        thumb.style.margin = '';
+        thumb.classList.remove('vertical-modal', 'aspect-video');
+      }
+      
+      modal.style.display = 'none';
+      backdrop.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    let currentFilter = 'all';
+
+    function filterByCategory(category) {
+      currentFilter = category;
+
+      // Update active tab styles
+      document.querySelectorAll('.work-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      if (category === 'saas' || category === 'all') {
+        document.getElementById('tab-saas').classList.add('active');
+        renderProjects('all');
+      } else if (category === 'vertical') {
+        document.getElementById('tab-vertical').classList.add('active');
+        renderProjects('vertical');
+      } else if (category === 'horizontal') {
+        document.getElementById('tab-horizontal').classList.add('active');
+        renderProjects('horizontal');
+      } else {
+        // fallback
+        document.getElementById('tab-saas').classList.add('active');
+        renderProjects('all');
+      }
+    }
+
+    function renderProjects(filter = 'all') {
+      const grid = document.getElementById('projects-grid');
+      grid.style.transition = 'opacity 0.25s ease';
+      grid.style.opacity = '0.25';
+
+      setTimeout(() => {
+        // Pause any playing preview videos before switching content
+        grid.querySelectorAll('video').forEach(v => {
+          try { v.pause(); } catch(e){}
+        });
+
+        grid.innerHTML = '';
+        grid.style.display = '';
+        grid.className = '';   // clean all layout classes
+
+        const status = document.getElementById('filter-status');
+        if (status) {
+          let label = 'Todos los proyectos';
+          if (filter === 'vertical') label = 'Formato vertical';
+          else if (filter === 'horizontal') label = 'Formato horizontal';
+          status.textContent = label;
+        }
+
+        if (filter === 'all' || filter === 'saas') {
+          // SaaS Editing Style (All) = todos. 
+          // 1) Horizontals ALWAYS first in their own section (appear at the very top).
+          // 2) Then verticals in a separate denser grid below: 5 per row (smaller height).
+          // Verticals use narrower columns → much shorter cards.
+          grid.style.display = 'block';
+          grid.style.gap = '0';
+          grid.style.gridTemplateColumns = '';
+          grid.style.alignItems = '';
+          grid.style.columnCount = '';
+          grid.classList.add('all-view');
+          grid.classList.remove('vertical-layout', 'horizontal-layout');
+
+          const horiz = projects.filter(p => p.aspect === 'horizontal');
+          const vert = projects.filter(p => p.aspect === 'vertical');
+
+          const w = window.innerWidth || 1024;
+
+          // Horizontals section first (2 items → side by side, responsive)
+          if (horiz.length > 0) {
+            const horizSection = document.createElement('div');
+            horizSection.className = 'horiz-section';
+            let hCols = 2;
+            if (w < 700) hCols = 1;
+            horizSection.style.gridTemplateColumns = `repeat(${hCols}, 1fr)`;
+
+            horiz.forEach((project) => {
+              const card = createProjectCard(project);
+              horizSection.appendChild(card);
+            });
+            grid.appendChild(horizSection);
+          }
+
+          // Verticals section AFTER: 5 per row by default (smaller cards)
+          if (vert.length > 0) {
+            const vertsSection = document.createElement('div');
+            vertsSection.className = 'verts-section';
+
+            // 5 per row on wide, fewer on small screens so they stay usable
+            let vCols = 5;
+            if (w < 400) vCols = 1;
+            else if (w < 620) vCols = 2;
+            else if (w < 860) vCols = 3;
+            else if (w < 1200) vCols = 4;
+            vertsSection.style.gridTemplateColumns = `repeat(${vCols}, 1fr)`;
+
+            vert.forEach((project) => {
+              const card = createProjectCard(project);
+              vertsSection.appendChild(card);
+            });
+            grid.appendChild(vertsSection);
+          }
+        } else {
+          grid.style.display = 'grid';
+          grid.style.gap = '18px';
+          grid.style.columnCount = '';
+          let filtered = projects;
+          if (filter === 'vertical') {
+            filtered = projects.filter(p => p.aspect === 'vertical');
+          } else if (filter === 'horizontal') {
+            filtered = projects.filter(p => p.aspect === 'horizontal');
+          }
+
+          if (filter === 'vertical') {
+            grid.classList.add('vertical-layout');
+          } else if (filter === 'horizontal') {
+            grid.classList.add('horizontal-layout');
+          }
+
+          filtered.forEach((project) => {
+            const card = createProjectCard(project);
+            grid.appendChild(card);
+          });
+        }
+
+        grid.style.opacity = '1';
+
+        // Ensure preview videos do not autoplay on render (but re-enable if Work section is visible)
+        grid.querySelectorAll('video').forEach(v => {
+          try {
+            v.pause();
+            if (v.readyState > 0) v.currentTime = 0;
+          } catch(e){}
+        });
+
+        // If user is already looking at the Work section, start autoplaying the (newly rendered) videos
+        const workCheck = document.getElementById('work');
+        if (workCheck) {
+          const r = workCheck.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.8 && r.bottom > 120) {
+            setTimeout(() => {
+              if (window.__playWorkVideos) {
+                window.__playWorkVideos();
+              } else {
+                grid.querySelectorAll('video').forEach(v => {
+                  v.muted = true;
+                  v.play().catch(() => {});
+                });
+              }
+            }, 90);
+          }
+        }
+      }, 130);
+    }
+
+    function createProjectCard(project) {
+      const div = document.createElement('div');
+      div.className = `project-card group cursor-pointer bg-zinc-950 rounded-3xl overflow-hidden`;
+      div.dataset.aspect = project.aspect || 'horizontal';
+      div.onclick = () => showProject(projects.indexOf(project));
+
+      const isVertical = project.aspect === 'vertical';
+      const mediaClass = isVertical ? 'vertical-media' : 'horizontal-media';
+
+      const mediaInner = project.video
+        ? `<video src="${project.video}" class="w-full h-full object-cover" muted loop playsinline preload="metadata"></video>`
+        : `<img src="https://picsum.photos/id/20${(projects.indexOf(project) % 5) + 1}/800/450" class="w-full h-full object-cover" alt="">`;
+
+      div.innerHTML = `
+        <div class="project-media ${mediaClass}">
+          ${mediaInner}
+          <div class="overlay absolute inset-0 bg-gradient-to-b from-black/10 via-black/30 to-black/90"></div>
+          <div class="glow-line"></div>
+          <div class="absolute top-3 left-3 z-10">
+            <span class="px-3 py-1 rounded-full text-xs bg-black/70 backdrop-blur font-medium border border-white/10">${project.type}</span>
+          </div>
+          <div class="absolute bottom-3 left-3 right-3 z-10">
+            <div class="flex items-center justify-between text-xs">
+              <div>
+                <div class="font-semibold">${project.title}</div>
+                <div class="text-zinc-400">${project.client}</div>
+              </div>
+              <div class="font-medium text-xs px-2 py-px rounded bg-white/5">${project.duration}</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-5">
+          <div class="flex items-center justify-between text-sm">
+            <div class="text-zinc-400 text-xs">${project.description.substring(0, 52)}...</div>
+          </div>
+        </div>
+      `;
+
+      // Attach hover play/pause for preview videos (no autoplay on load)
+      const vid = div.querySelector('video');
+      if (vid) {
+        vid.autoplay = false;
+        div.addEventListener('mouseenter', () => {
+          vid.play().catch(() => {});
+        });
+        div.addEventListener('mouseleave', () => {
+          vid.pause();
+        });
+      }
+
+      return div;
+    }
+
+    function getCategoryName(cat) {
+      if (cat === 'saas') return 'Todos';
+      if (cat === 'vertical') return 'Vertical';
+      if (cat === 'horizontal') return 'Horizontal';
+      return cat;
+    }
+
+    function playHeroReel() {
+      const thumb = document.querySelector('header .relative.aspect-\\[16\\/10\\.2\\]');
+      if (!thumb) return;
+
+      const overlay = document.createElement('div');
+      overlay.className = 'absolute inset-0 bg-zinc-950/95 flex items-center justify-center z-10 rounded-3xl';
+      overlay.innerHTML = `
+        <div class="text-center">
+          <div class="inline-flex items-center gap-x-3 px-5 py-3 rounded-2xl bg-white/5 border border-white/10 mb-4">
+            <i class="fas fa-play text-emerald-400"></i>
+            <span class="font-medium">Reproduciendo avance del showreel...</span>
+          </div>
+          <button class="text-xs px-5 py-1 border border-white/20 rounded-2xl text-zinc-400 hover:bg-white/5">Cerrar avance</button>
+        </div>
+      `;
+      
+      thumb.appendChild(overlay);
+
+      overlay.querySelector('button').addEventListener('click', () => overlay.remove());
+      
+      setTimeout(() => {
+        if (overlay.parentNode) overlay.remove();
+      }, 3600);
+    }
+
+    function initSmoothScroll() {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            e.preventDefault();
+            const yOffset = -80;
+            const y = target.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        });
+      });
+    }
+
+    function initKeyboard() {
+      document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+          const modal = document.getElementById('modal');
+          if (modal.style.display === 'flex') {
+            closeModal();
+          }
+        }
+      });
+    }
+
+    function initWorkScrollFeatures() {
+      const workSection = document.getElementById('work');
+      if (!workSection) return;
+
+      function playWorkVideos() {
+        const grid = document.getElementById('projects-grid');
+        if (!grid) return;
+        grid.querySelectorAll('video').forEach(v => {
+          try {
+            v.muted = true;
+            v.loop = true;
+            v.playsInline = true;
+            v.play().catch(() => {});
+          } catch (e) {}
+        });
+      }
+
+      function pauseWorkVideos() {
+        const grid = document.getElementById('projects-grid');
+        if (!grid) return;
+        grid.querySelectorAll('video').forEach(v => {
+          try { v.pause(); } catch (e) {}
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playWorkVideos();
+          } else {
+            pauseWorkVideos();
+          }
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: '-50px 0px -70px 0px'
+      });
+
+      observer.observe(workSection);
+
+      // Handle initial load if Work section is already in view
+      setTimeout(() => {
+        const rect = workSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.72 && rect.bottom > 90) {
+          playWorkVideos();
+        }
+      }, 850);
+
+      // Make helpers available after tab/filter changes
+      window.__playWorkVideos = playWorkVideos;
+      window.__pauseWorkVideos = pauseWorkVideos;
+    }
+
+    function initFloatingAvailable() {
+      const el = document.getElementById('available-floating');
+      if (!el) return;
+
+      let shown = false;
+
+      function show() {
+        if (shown) return;
+        shown = true;
+        el.classList.add('show');
+      }
+
+      // Pop in after user scrolls a little (global across the whole site)
+      function checkScroll() {
+        if (window.scrollY > 340) {
+          show();
+          window.removeEventListener('scroll', checkScroll);
+        }
+      }
+
+      window.addEventListener('scroll', checkScroll, { passive: true });
+
+      // If page already scrolled on load
+      if (window.scrollY > 340) {
+        show();
+      }
+    }
+
+    // Live responsive re-render for SaaS tab (horizontals first + verticals at 5-per-row with correct sizes)
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const saasTab = document.getElementById('tab-saas');
+        if (saasTab && saasTab.classList.contains('active')) {
+          renderProjects('all');
+        }
+      }, 160);
+    });
+
+    function init() {
+      configureTailwind();
+      initNav();
+      initScrollProgress();
+      initScrollReveals();
+
+      initSmoothScroll();
+      initKeyboard();
+      
+      const modal = document.getElementById('modal');
+      const backdrop = document.getElementById('modal-backdrop');
+      if (modal) modal.style.display = 'none';
+      if (backdrop) backdrop.style.display = 'none';
+
+      // Default: SaaS Editing Style tab = show all projects (mixed aspect ratios)
+      document.getElementById('tab-saas').classList.add('active');
+      renderProjects('all');
+
+      // Init video autoplay when reaching Work + global floating available badge
+      initWorkScrollFeatures();
+      initFloatingAvailable();
+
+      console.log('%c[Fernansmotion] Sistema de proyectos con 3 pestañas inicializado.', 'color:#3f3f46');
+    }
+
+    /* =============================================
+       MOTION DESIGN BACKGROUND - 3D Scroll Parallax
+       Only affects background ambient elements
+       ============================================= */
+    window.onload = init;
+  </script>
+</body>
+</html>

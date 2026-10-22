@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proyectos de Motion Design | fernansmotion — Fernan Valdez</title>
+<meta name="description" content="Explora el portafolio de fernansmotion: animación de interfaces, demos, explainer videos y lanzamientos. Mira proyectos en formato horizontal y vertical.">
+<link rel="icon" href="assets/favicon.svg?v=f2" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=f2">
+<meta name="author" content="Fernan Valdez">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="fernansmotion">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Proyectos de Motion Design y Videos SaaS | fernansmotion">
+<meta name="twitter:description" content="Explora el portafolio de fernansmotion: animación de interfaces, demos, explainer videos y lanzamientos. Mira proyectos en formato horizontal y vertical.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://fernansmotion.com/#fernansmotion", "name": "Fernan Valdez", "alternateName": "fernansmotion", "jobTitle": "Motion Designer", "email": "fernansmotion@hotmail.com", "knowsAbout": ["Motion design", "SaaS", "Explainer videos", "Videos de lanzamiento", "Animación de interfaces"]}, {"@type": "CollectionPage", "name": "Proyectos de fernansmotion", "inLanguage": "es", "description": "Explora el portafolio de fernansmotion: animación de interfaces, demos, explainer videos y lanzamientos. Mira proyectos en formato horizontal y vertical."}]}</script>
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_DO">
+<meta property="og:title" content="Proyectos de Motion Design y Videos SaaS | fernansmotion">
+<meta property="og:description" content="Explora el portafolio de fernansmotion: animación de interfaces, demos, explainer videos y lanzamientos. Mira proyectos en formato horizontal y vertical.">
+<meta property="og:image" content="https://fernansmotion.com/assets/fernansmotion.jpg">
+<meta name="twitter:image" content="https://fernansmotion.com/assets/fernansmotion.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   fernansmotion — base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --bg: #ffffff;
+  --ink: #08080a;
+  --ink-soft: #4a4a52;
+  --muted: #b6b6bd;
+  --faint: #ececef;
+  --line: rgba(0,0,0,0.09);
+  --violet: #7c4dff;
+  --lilac: #c084fc;
+  --radius-card: 26px;
+  --pad: clamp(18px, 4vw, 56px);
+  --maxw: 1240px;
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, "SF Pro Display", BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
+img, video { display: block; max-width: 100%; }
+
+::selection { background: rgba(124, 77, 255, 0.2); color: #1e1b4b; }
+
+:focus-visible { outline: 2px solid #7c4dff; outline-offset: 3px; border-radius: 6px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); position: relative; z-index: 2; }
+
+.skip {
+  position: absolute; left: 16px; top: -80px; z-index: 999;
+  background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 999px;
+  font-size: 14px; font-weight: 600; transition: top .2s ease;
+}
+.skip:focus { top: 16px; }
+
+/* ============================================================
+   FONDO — shapes con fast box blur
+   Cuadros suaves y desenfocados que derivan lento detrás de todo.
+   El blur en cajas (no círculos) conserva el borde recto del
+   Fast Box Blur de After Effects.
+   ============================================================ */
+.bg-layer {
+  position: fixed;
+  inset: -12vh 0;      /* margen vertical para el paralaje del scroll */
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  contain: layout style;
+}
+
+/* Barra de progreso de lectura */
+.progreso {
+  position: fixed; top: 0; left: 0; right: 0; height: 2.5px; z-index: 95;
+  transform: scaleX(0); transform-origin: 0 50%;
+  background: linear-gradient(90deg, #4c1d95 0%, #7c4dff 45%, #c084fc 80%, #ffffff 100%);
+  box-shadow: 0 0 12px rgba(124, 77, 255, 0.6);
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  border-radius: 14%;
+  filter: blur(var(--blur, 90px));
+  opacity: var(--op, 0.5);
+  will-change: transform;
+  animation: drift var(--dur, 34s) ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.shape-1 {
+  width: 44vw; height: 40vw; min-width: 380px; min-height: 340px;
+  top: -6%; right: -6%;
+  background: linear-gradient(140deg, #b79cff 0%, #7c4dff 100%);
+  --blur: 100px; --op: 0.42; --dur: 38s;
+  transform: rotate(14deg);
+}
+
+.shape-2 {
+  width: 34vw; height: 34vw; min-width: 300px; min-height: 300px;
+  top: 34%; left: -10%;
+  background: linear-gradient(210deg, #ffd9a0 0%, #ff9ec4 100%);
+  --blur: 110px; --op: 0.4; --dur: 46s; --delay: -12s;
+  transform: rotate(-22deg);
+}
+
+.shape-3 {
+  width: 30vw; height: 26vw; min-width: 260px; min-height: 230px;
+  top: 62%; right: 2%;
+  background: linear-gradient(60deg, #a5e8ff 0%, #8f7bff 100%);
+  --blur: 95px; --op: 0.38; --dur: 30s; --delay: -20s;
+  transform: rotate(8deg);
+}
+
+.shape-4 {
+  width: 22vw; height: 22vw; min-width: 200px; min-height: 200px;
+  top: 12%; left: 22%;
+  background: linear-gradient(130deg, #d3c4ff 0%, #ffc6dd 100%);
+  --blur: 100px; --op: 0.35; --dur: 52s; --delay: -5s;
+  transform: rotate(30deg);
+}
+
+/* --bg-y lo actualiza el scroll: los shapes van a otro ritmo que el contenido */
+@keyframes drift {
+  0%, 100% { transform: translate3d(0, var(--bg-y, 0px), 0) rotate(12deg) scale(1); }
+  33%      { transform: translate3d(4vw, calc(-3vh + var(--bg-y, 0px)), 0) rotate(20deg) scale(1.08); }
+  66%      { transform: translate3d(-3vw, calc(4vh + var(--bg-y, 0px)), 0) rotate(4deg) scale(0.95); }
+}
+
+/* Velo blanco: mantiene el texto legible sobre los shapes */
+.bg-veil {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(115% 75% at 50% 22%, rgba(255,255,255,0.34) 0%, rgba(255,255,255,0.62) 52%, rgba(255,255,255,0.78) 100%);
+}
+
+/* Grano fino, para que el degradado no se vea plano */
+.bg-grain {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0.5;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.014) 1px, transparent 1px);
+  background-size: 3px 3px;
+}
+
+/* ============================================================
+   NAV — píldora flotante
+   ============================================================ */
+.nav {
+  position: fixed; top: 18px; left: 0; right: 0; z-index: 90;
+  display: flex; justify-content: center; align-items: center; gap: 10px;
+  padding: 0 16px;
+}
+
+.nav-avatar {
+  width: 50px; height: 50px; border-radius: 999px; flex-shrink: 0;
+  background: linear-gradient(140deg, #1a1a20 0%, #000 100%);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 21px; font-weight: 700; letter-spacing: -0.06em;
+  border: 3px solid rgba(255,255,255,0.85);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.14);
+  transition: transform .35s cubic-bezier(.22,1,.36,1);
+}
+.nav-avatar:hover { transform: scale(1.06) rotate(-4deg); }
+
+.nav-pill {
+  display: flex; align-items: center; gap: clamp(14px, 3vw, 30px);
+  padding: 15px clamp(18px, 4vw, 28px);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.72);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08), 0 1px 0 rgba(255,255,255,0.9) inset;
+}
+.nav-pill a {
+  font-size: 14px; font-weight: 500; color: var(--ink-soft);
+  white-space: nowrap; position: relative; transition: color .2s ease;
+}
+.nav-pill a:hover { color: var(--ink); }
+.nav-pill a::after {
+  content: ''; position: absolute; left: 0; bottom: -5px; height: 1.5px; width: 0;
+  background: var(--ink); transition: width .3s cubic-bezier(.22,1,.36,1);
+}
+.nav-pill a:hover::after { width: 100%; }
+
+
+/* ============================================================
+   Títulos de sección con esquinas
+   ============================================================ */
+section { position: relative; z-index: 2; }
+
+.sec-head { position: relative; display: inline-block; padding: 16px 26px 22px; margin-bottom: clamp(30px, 5vw, 52px); }
+.sec-head h2 {
+  margin: 0; font-size: clamp(32px, 5.6vw, 62px);
+  font-weight: 700; letter-spacing: -0.05em; line-height: 0.98;
+}
+.sec-head .label {
+  display: block; margin-top: 8px;
+  font-size: 10.5px; letter-spacing: 0.14em; font-weight: 500;
+  color: var(--muted); text-transform: uppercase;
+}
+.sec-head i {
+  position: absolute; width: 13px; height: 13px; border: 1px solid rgba(0,0,0,0.22);
+}
+.sec-head i.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+.sec-head i.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+.sec-head i.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+.sec-head i.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+
+.wl-chip {
+  font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line);
+  color: var(--ink-soft); background: rgba(255,255,255,0.55);
+}
+
+/* ============================================================
+   CONTACTO + FOOTER
+   ============================================================ */
+.contact { padding: 0 0 clamp(60px, 9vw, 110px); }
+.contact-card {
+  border-radius: 34px; padding: clamp(30px, 5vw, 62px);
+  background: rgba(255,255,255,0.66);
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 30px 70px -34px rgba(0,0,0,0.28);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+}
+.contact-card h2 { margin: 0 0 14px; font-size: clamp(28px, 5vw, 54px); font-weight: 700; letter-spacing: -0.05em; line-height: 1.02; }
+.contact-card p { margin: 0 0 26px; font-size: 15.5px; line-height: 1.6; color: var(--ink-soft); font-weight: 400; letter-spacing: -0.01em; max-width: 46ch; }
+.contact-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+
+footer { padding: 0 0 30px; position: relative; z-index: 2; }
+.foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 30px; padding: clamp(34px, 5vw, 56px) 0 clamp(30px, 5vw, 46px); border-top: 1px solid var(--line); }
+.foot-col h4 { margin: 0 0 14px; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.foot-col a, .foot-col div { display: block; font-size: 14.5px; margin-bottom: 9px; color: var(--ink-soft); transition: color .2s ease; letter-spacing: -0.015em; }
+.foot-col a:hover { color: var(--ink); }
+.foot-mail { font-size: clamp(20px, 3.2vw, 30px) !important; font-weight: 600; letter-spacing: -0.04em; color: var(--ink) !important; }
+
+.wordmark {
+  font-size: clamp(52px, 15.5vw, 230px); font-weight: 700; letter-spacing: -0.06em;
+  line-height: 0.8; color: var(--faint); text-align: center;
+  padding-bottom: 6px; user-select: none;
+}
+.foot-legal { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 22px; font-size: 12px; color: var(--muted); letter-spacing: -0.01em; }
+
+
+.rv { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1); }
+.rv.in { opacity: 1; transform: none; }
+
+
+/* ============================================================
+   CABECERA DE LA PÁGINA
+   ============================================================ */
+.pg-head { padding: clamp(120px, 16vh, 175px) 0 clamp(30px, 5vw, 54px); }
+
+.volver {
+  display: inline-flex; align-items: center; gap: 9px; margin-bottom: 26px;
+  height: 40px; padding: 0 18px 0 15px; border-radius: 999px;
+  border: 1px solid var(--line); background: rgba(255,255,255,0.62);
+  font-size: 13.5px; font-weight: 600;
+  transition: background .25s ease, transform .28s cubic-bezier(.22,1,.36,1);
+}
+.volver:hover { background: #fff; transform: translateX(-3px); }
+
+.pg-title {
+  margin: 0; font-size: clamp(40px, 7.4vw, 82px);
+  font-weight: 700; letter-spacing: -0.055em; line-height: 0.98;
+  background: linear-gradient(100deg,
+    #4c1d95 0%, #6d28d9 18%, #8b5cf6 38%,
+    #c4a3ff 52%, #8b5cf6 66%, #6d28d9 84%, #4c1d95 100%);
+  background-size: 260% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: handle-sweep 11s ease-in-out infinite;
+}
+@keyframes handle-sweep {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
+}
+.pg-sub { margin: 16px 0 0; max-width: 46ch; font-size: 16px; line-height: 1.55;
+  color: var(--ink-soft); font-weight: 400; letter-spacing: -0.01em; }
+
+/* ============================================================
+   BLOQUES POR FORMATO
+   Cada orientación lleva su propia retícula: las horizontales
+   piden columnas anchas y las verticales columnas estrechas.
+   Mezclarlas en una sola dejaba huecos y alturas dispares.
+   ============================================================ */
+.bloque { padding: clamp(34px, 5.5vw, 62px) 0; scroll-margin-top: 92px; }
+
+.bloque-top {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-bottom: 16px; margin-bottom: clamp(18px, 2.6vw, 26px);
+  border-bottom: 1px solid var(--line);
+}
+.bloque-top h2 { margin: 0; font-size: clamp(23px, 3.4vw, 36px); font-weight: 700; letter-spacing: -0.045em; }
+.bloque-top .n {
+  font-size: 10.5px; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+.bloque-top .prop { margin-left: auto; font-size: 11px; letter-spacing: 0.1em; color: var(--muted); }
+
+.rej { display: grid; gap: clamp(12px, 1.7vw, 20px); align-items: start; }
+.rej.h { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.rej.v { grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); }
+
+/* En el teléfono las verticales van de dos en dos: a una sola columna
+   cada tarjeta mide casi 600px de alto y la página se vuelve eterna. */
+@media (max-width: 620px) {
+  .rej.v { grid-template-columns: repeat(2, 1fr); }
+}
+
+.pieza {
+  position: relative; overflow: hidden; cursor: pointer;
+  border-radius: 16px; background: #0d0d10;
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 16px 36px -22px rgba(0,0,0,0.35);
+  transition: transform .45s cubic-bezier(.22,1,.36,1), box-shadow .45s ease;
+}
+.pieza:hover { transform: translateY(-5px); box-shadow: 0 26px 52px -22px rgba(0,0,0,0.45); }
+.pieza.h { aspect-ratio: 16 / 9; }
+.pieza.v { aspect-ratio: 9 / 16; }
+.pieza video { width: 100%; height: 100%; object-fit: cover; }
+
+.pieza-veil {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,0.76) 100%);
+  opacity: 0; transition: opacity .4s ease;
+}
+.pieza:hover .pieza-veil { opacity: 1; }
+
+.pieza-meta {
+  position: absolute; left: 12px; right: 12px; bottom: 11px; z-index: 2; color: #fff;
+  opacity: 0; transform: translateY(7px);
+  transition: opacity .4s ease, transform .4s cubic-bezier(.22,1,.36,1);
+}
+.pieza:hover .pieza-meta { opacity: 1; transform: none; }
+.pieza-meta b { display: block; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
+.pieza-meta span { font-size: 10.5px; color: rgba(255,255,255,0.72); }
+
+.pieza-play {
+  position: absolute; top: 50%; left: 50%; z-index: 2;
+  width: 50px; height: 50px; border-radius: 999px;
+  transform: translate(-50%,-50%) scale(0.7); opacity: 0;
+  background: rgba(255,255,255,0.94);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #08080a; padding-left: 3px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  transition: opacity .35s ease, transform .45s cubic-bezier(.22,1,.36,1);
+}
+.pieza:hover .pieza-play { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+
+.pieza-dur {
+  position: absolute; top: 10px; right: 11px; z-index: 2;
+  padding: 4px 9px; border-radius: 999px;
+  background: rgba(0,0,0,0.55); backdrop-filter: blur(8px);
+  color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   POPUP
+   ============================================================ */
+.lb { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: clamp(14px, 3vw, 40px); }
+.lb[hidden] { display: none; }
+
+.lb-bg {
+  position: absolute; inset: 0;
+  background: rgba(12, 10, 20, 0.62);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  animation: lb-in .35s ease both;
+}
+@keyframes lb-in { from { opacity: 0; } to { opacity: 1; } }
+
+.lb-box {
+  position: relative; z-index: 2; display: flex; flex-direction: column;
+  max-height: 100%; background: #fff; border-radius: 22px; overflow: hidden;
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,0.5);
+  animation: lb-pop .42s cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes lb-pop { from { opacity: 0; transform: translateY(22px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+.lb-box.h { width: min(1000px, 94vw); }
+.lb-box.v { width: min(400px, 88vw); }
+
+.lb-media { background: #0d0d10; position: relative; flex-shrink: 1; min-height: 0; }
+.lb-media video { display: block; width: 100%; max-height: 72vh; object-fit: contain; }
+.lb-box.v .lb-media video { max-height: 64vh; }
+
+/* Vertical en pantalla ancha: la ficha va al lado del video, porque
+   apilada el tope de altura recortaba antes que el ancho y quedaban
+   franjas negras a los lados. */
+@media (min-width: 780px) {
+  .lb-box.v { flex-direction: row; width: auto; align-items: stretch; }
+  .lb-box.v .lb-media { display: flex; flex-shrink: 0; }
+  .lb-box.v .lb-media video { width: auto; height: 78vh; max-height: none; }
+  .lb-box.v .lb-info { width: 330px; flex-shrink: 0; align-self: center; }
+  .lb-box.v .lb-desc { max-width: none; }
+}
+
+.lb-x {
+  position: absolute; top: 12px; right: 12px; z-index: 3;
+  width: 38px; height: 38px; border-radius: 999px;
+  background: rgba(255,255,255,0.92); font-size: 14px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.24);
+  transition: transform .25s cubic-bezier(.22,1,.36,1);
+}
+.lb-x:hover { transform: scale(1.1) rotate(90deg); }
+
+.lb-info { padding: clamp(16px, 2.4vw, 26px); flex-shrink: 0; }
+.lb-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.lb-cli { font-size: 12px; font-weight: 600;
+  background: linear-gradient(100deg, #7c4dff, #c084fc);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.lb-info h3 { margin: 3px 0 0; font-size: clamp(19px, 2.4vw, 26px); font-weight: 700; letter-spacing: -0.04em; }
+.lb-dur { font-size: 11.5px; letter-spacing: 0.08em; color: var(--ink-soft); padding: 5px 11px; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+.lb-desc { margin: 12px 0 0; font-size: 14px; line-height: 1.55; color: var(--ink-soft); font-weight: 400; max-width: 62ch; }
+.lb-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+
+.lb-cta {
+  display: inline-flex; align-items: center; gap: 9px; margin-top: 18px;
+  height: 42px; padding: 0 20px; border-radius: 999px;
+  background: var(--ink); color: #fff; font-size: 13.5px; font-weight: 600;
+  transition: transform .25s cubic-bezier(.22,1,.36,1);
+}
+.lb-cta:hover { transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .rv { opacity: 1; transform: none; }
+  .shape { animation: none; }
+  .pg-title { animation: none; }
+}
+
+</style>
+<link rel="stylesheet" href="assets/footer.css?v=20260930-2">
+<link rel="stylesheet" href="assets/hover-effects.css?v=1">
+<link rel="canonical" href="https://fernansmotion.com/proyectos.html">
+<meta property="og:url" content="https://fernansmotion.com/proyectos.html">
+<link rel="stylesheet" href="assets/identity.css?v=4">
+<link rel="stylesheet" href="assets/refinements.css?v=20260930-5">
+<noscript><style>.rv,.featured-card.slide { opacity:1; transform:none; } #fmt-tabs,#motion-toggle { display:none; }</style></noscript>
+</head>
+<body id="pagina">
+<a class="skip" href="#lista">Ir a los proyectos</a>
+<div class="progreso" id="progreso" aria-hidden="true"></div>
+
+<div class="bg-layer" aria-hidden="true">
+  <div class="shape shape-1"></div>
+  <div class="shape shape-2"></div>
+  <div class="shape shape-3"></div>
+  <div class="shape shape-4"></div>
+</div>
+<div class="bg-veil" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Principal">
+  <a href="index.html" class="nav-avatar" aria-label="fernansmotion, inicio"><img src="assets/fernansmotion-purple.jpg?v=purple" alt="Fernan Valdez" width="48" height="48"></a>
+  <div class="nav-pill">
+    <a href="index.html">Inicio</a>
+    <a href="index.html#servicios">Servicios</a>
+    <a href="index.html#precios">Precios</a>
+    <a href="contacto.html">Contacto</a>
+  </div>
+</nav>
+
+<header class="pg-head">
+  <div class="wrap">
+    <a class="volver" href="index.html"><span aria-hidden="true">←</span> Volver al inicio</a>
+    <h1 class="pg-title">Proyectos</h1>
+    <p class="pg-sub" id="pg-sub">Interfaces, historias y productos en movimiento. Explora las piezas y abre cualquiera para verla completa.</p>
+  </div>
+</header>
+
+<main id="lista"><noscript><div class="wrap noscript-projects"><a href="assets/Work/REEL%20.mp4"><img src="assets/posters/reel.jpg" alt="" loading="lazy"><h3>Reel principal</h3><p>Showreel · Edición · 0:14</p><span>Reproducir video ↗</span></a><a href="assets/Work/Vulnaudit-1.mp4"><img src="assets/posters/vulnaudit-1.jpg" alt="" loading="lazy"><h3>VulnAudit — Reel 01</h3><p>Tech · 2D/3D · 0:59</p><span>Reproducir video ↗</span></a><a href="assets/Work/Vulnaudit-2.mp4"><img src="assets/posters/vulnaudit-2.jpg" alt="" loading="lazy"><h3>VulnAudit — Reel 02</h3><p>3D · Producto · 0:54</p><span>Reproducir video ↗</span></a><a href="assets/Work/Lamarca.mp4"><img src="assets/posters/lamarca.jpg" alt="" loading="lazy"><h3>Lamarca</h3><p>Marca · Comercial · 0:23</p><span>Reproducir video ↗</span></a><a href="assets/Work/digonetwork.mp4"><img src="assets/posters/digonetwork.jpg" alt="" loading="lazy"><h3>Digo Network</h3><p>Tech · Motion · 0:22</p><span>Reproducir video ↗</span></a><a href="assets/Work/Paleta%20de%20colores.mp4"><img src="assets/posters/paleta-de-colores.jpg" alt="" loading="lazy"><h3>Paleta de colores</h3><p>Color · Identidad · 0:15</p><span>Reproducir video ↗</span></a><a href="assets/Work/premios.mp4"><img src="assets/posters/premios.jpg" alt="" loading="lazy"><h3>Campaña de premios</h3><p>Evento · Campaña · 0:27</p><span>Reproducir video ↗</span></a><a href="assets/Work/motion-interface.mp4"><img src="assets/posters/motion-interface.jpg" alt="" loading="lazy"><h3>Motion de interfaces</h3><p>UI Motion · Composición · 0:25</p><span>Reproducir video ↗</span></a><a href="assets/Work/teaser-soon.mp4"><img src="assets/posters/teaser-soon.jpg" alt="" loading="lazy"><h3>Teaser — Soon</h3><p>Teaser · Tipografía · 0:09</p><span>Reproducir video ↗</span></a><a href="assets/Work/information-memorandum.mp4"><img src="assets/posters/information-memorandum.jpg" alt="" loading="lazy"><h3>Information Memorandum</h3><p>Editorial · Financiero · 0:10</p><span>Reproducir video ↗</span></a><a href="assets/Work/flowmind.mp4"><img src="assets/posters/flowmind.jpg" alt="" loading="lazy"><h3>FlowMind</h3><p>IA · SaaS · 0:23</p><span>Reproducir video ↗</span></a><a href="assets/Work/animaciones-sin-tutoriales.mp4"><img src="assets/posters/animaciones-sin-tutoriales.jpg" alt="" loading="lazy"><h3>Animaciones sin tutoriales</h3><p>Tutorial · Motion · 0:23</p><span>Reproducir video ↗</span></a></div></noscript>
+  <section class="bloque">
+    <div class="wrap">
+      <div class="bloque-top">
+        <h2>Horizontal</h2>
+        <span class="n" id="n-h"></span>
+        <span class="prop">16 : 9</span>
+      </div>
+      <div class="rej h" id="rej-h"></div>
+    </div>
+  </section>
+
+  <section class="bloque">
+    <div class="wrap">
+      <div class="bloque-top">
+        <h2>Vertical</h2>
+        <span class="n" id="n-v"></span>
+        <span class="prop">9 : 16</span>
+      </div>
+      <div class="rej v" id="rej-v"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="fm-footer">
+  <div class="fm-footer-inner">
+
+    <!-- Barra superior: Tag a la izquierda y Redes en esquina superior derecha -->
+    <div class="fm-top-bar">
+      <div class="fm-top-tag">
+        <span class="fm-spark" aria-hidden="true">✳</span>
+        <span>Motion para SaaS &amp; IA</span>
+      </div>
+      <!-- Redes sociales en la esquina superior derecha -->
+      <div class="fm-social-row fm-social-top" role="group" aria-label="Redes sociales">
+        <!-- WhatsApp -->
+        <a class="fm-social-btn" href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20conversar%20sobre%20un%20proyecto%20de%20motion%20design." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.03-1.25-.75-.67-1.26-1.5-1.41-1.75-.15-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.77 2.71 4.29 3.8.6.26 1.07.41 1.44.53.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.59.21-1.09.15-1.18-.07-.1-.23-.17-.48-.29z"/></svg>
+        </a>
+        <!-- X (Twitter) -->
+        <a class="fm-social-btn" href="https://x.com/fernansmotion" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <!-- YouTube -->
+        <a class="fm-social-btn" href="https://www.youtube.com/@fernansmotion" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a class="fm-social-btn" href="https://www.instagram.com/fernansmotion/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Grid estilo Fargo: 3 Columnas principales -->
+    <div class="fm-columns">
+
+      <!-- Columna 1: Contacto -->
+      <div class="fm-col">
+        <span class="fm-col-header">Contacto</span>
+        <p class="fm-col-desc">
+          ¿Tienes un proyecto en mente?<br>
+          Conversemos sobre tu producto.
+        </p>
+        <p class="fm-col-desc" style="margin-top: 14px;">
+          Por <strong>Fernan Valdez</strong> · <a href="mailto:fernansmotion@hotmail.com">fernansmotion@hotmail.com</a>
+        </p>
+      </div>
+
+      <!-- Columna 2: Servicios -->
+      <div class="fm-col">
+        <span class="fm-col-header">Servicios</span>
+        <ul class="fm-link-list">
+          <li><a href="index.html#servicios-explainer">Explainer Videos</a></li>
+          <li><a href="index.html#servicios-demos">Demos de Producto</a></li>
+          <li><a href="index.html#servicios-lanzamiento">Videos de Lanzamiento</a></li>
+          <li><a href="index.html#servicios-ui">Motion para UI</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Navegación -->
+      <div class="fm-col">
+        <span class="fm-col-header">Navegación</span>
+        <ul class="fm-link-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#lista">Proyectos ↗</a></li>
+          <li><a href="index.html#precios">Precios</a></li>
+          <li><a href="https://wa.me/18098047825?text=Hola%20Fernan%2C%20vi%20tu%20portafolio%20y%20me%20gustar%C3%ADa%20conversar%20sobre%20un%20proyecto%20de%20motion%20design." target="_blank" rel="noopener noreferrer">WhatsApp ↗</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Wordmark gigante estilo Fargo al fondo -->
+    <div class="fm-giant-wordmark-wrap" aria-hidden="true">
+      <div class="fm-giant-wordmark">fernansmotion</div>
+    </div>
+  </div>
+
+  <!-- Barra legal y regreso al inicio -->
+  <div class="fm-sub-bar">
+    <span>Software que se entiende.</span>
+    <a href="#pagina">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<dialog class="lb" id="lb" aria-labelledby="lb-titulo">
+  <div class="lb-bg" id="lb-bg"></div>
+  <div class="lb-box" id="lb-box">
+    <button class="lb-x" type="button" id="lb-x" aria-label="Cerrar">✕</button>
+    <div class="lb-media"><video id="lb-video" controls playsinline preload="none"></video></div>
+    <div class="lb-info">
+      <div class="lb-top">
+        <div>
+          <div class="lb-cli" id="lb-cliente"></div>
+          <h3 id="lb-titulo"></h3>
+        </div>
+        <div class="lb-dur" id="lb-dur"></div>
+      </div>
+      <p class="lb-desc" id="lb-desc"></p>
+      <div class="lb-tags" id="lb-tags"></div>
+      <dl class="project-facts" id="lb-facts"></dl>
+      <a class="lb-cta" id="lb-cta" href="#" target="_blank" rel="noopener noreferrer">
+        Hablemos de este proyecto <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script src="assets/smooth-scroll.js?v=20260930-wa"></script>
+<script src="assets/proyectos.js?v=20260930"></script>
+<script src="assets/portfolio.js?v=20260930"></script>
+<script src="assets/gallery.js?v=20260930" defer></script>
+<script src="assets/hover-effects.js?v=20260930"></script>
+<script src="assets/cursor-motion.js?v=20260930"></script>
+</body>
+</html>
